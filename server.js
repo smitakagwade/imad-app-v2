@@ -5,10 +5,10 @@ var Pool = require('pg').Pool;
 var config = {
   host: 'db.imad.hasura-app.io',
   user: 'smitakagwade',
-  //password: 'bar',
  
   database: 'smitakagwade',
    port:'5432',
+   password:process.env.DB_PASSWORD
 };
 
 var app = express();
@@ -18,8 +18,21 @@ app.get('/', function (req, res) {
 res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
+var pool = new Pool(config)
+
 app.get('/test-db',function(res, req){
 //res.send('article one');
+pool.Query('select * from test',function(err,result)
+{
+    if(err)
+    {
+    res.status(500).send(err.toString());
+    }
+    else
+    {
+        res.send(JSON.stringify(result));
+    }
+})
 });
 /*app.get('/article-two',function(res, req){
 res.send('article two requested and will be served here'); 
