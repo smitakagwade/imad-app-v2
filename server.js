@@ -22,7 +22,7 @@ var pool = new Pool(config)
 
 app.get('/test-db',function(res, req){
 //res.send('article one');
-pool.Query('select * from test',function(err,result)
+pool.query('select * from test',function(err,result)
 {
     if(err)
     {
