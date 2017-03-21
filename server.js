@@ -32,7 +32,7 @@ pool.query('select * from test',function(err,result)
     {
         res.send(JSON.stringify(result));
     }
-})
+});
 });
 /*app.get('/article-two',function(res, req){
 res.send('article two requested and will be served here'); 
