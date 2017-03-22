@@ -1,7 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-var Pool = require('pg').Pool;
+/*var Pool = require('pg').Pool;
 var config = {
   host: 'db.imad.hasura-app.io',
   user: 'smitakagwade',
@@ -9,7 +9,7 @@ var config = {
   database: 'smitakagwade',
    port:'5432',
    password:process.env.DB_PASSWORD
-};
+};*/
 
 var app = express();
 app.use(morgan('combined'));
@@ -20,7 +20,7 @@ res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 
 var pool = new Pool(config)
 
-app.get('/test-db',function(res, req){
+/*app.get('/test-db',function(res, req){
 //res.send('article one');
 pool.query('select * from test',function(err,result)
 {
@@ -33,13 +33,19 @@ pool.query('select * from test',function(err,result)
         res.send(JSON.stringify(result));
     }
 });
-});
+});*/
 /*app.get('/article-two',function(res, req){
 res.send('article two requested and will be served here'); 
 });
 app.get('/article-three',function(res, req){
 res.send('article three requested and will be served here'); 
 });*/
+
+var counter=0;
+app.get('/counter',function(req,res){
+    counter=counter+1;
+    res.send(counter.toString());
+});
 app.get('/ui/style.css', function (req, res) {
 res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
